@@ -1,0 +1,7 @@
+.videos-list {
+  display: grid;
+  -moz-column-gap: 40px;
+       column-gap: 40px;
+  row-gap: 32px;
+  grid-template-columns: repeat(4, minmax(280px, 1fr));
+}/*# sourceMappingURL=VideosBox.css.map */
