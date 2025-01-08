@@ -90,3 +90,21 @@
     bottom: 24px;
   }
 }
+
+.video-item:hover {
+  .video-item-thumb {
+    cursor: pointer;
+    button {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      align-items: center;
+      cursor: pointer;
+    }
+  }
+}
+
+.trend-item {
+  min-width: 470px;
+  width: 470px;
+}

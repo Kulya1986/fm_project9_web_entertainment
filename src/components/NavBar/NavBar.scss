@@ -1,6 +1,7 @@
 @import "./../../_variables.scss";
 
 nav {
+  max-width: 6rem;
   width: 6rem;
   height: 60rem;
   border-radius: 20px;
@@ -10,8 +11,19 @@ nav {
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
+  margin-right: 36px;
 
-  div {
+  #menu-account-logo {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+  #menu-account-logo:hover {
+    cursor: pointer;
+  }
+
+  #menu {
     text-align: center;
     width: 80px;
     margin: 2rem 2rem 0rem;

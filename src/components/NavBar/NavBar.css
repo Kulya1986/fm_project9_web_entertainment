@@ -1,4 +1,5 @@
 nav {
+  max-width: 6rem;
   width: 6rem;
   height: 60rem;
   border-radius: 20px;
@@ -8,13 +9,23 @@ nav {
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
+  margin-right: 36px;
 }
-nav div {
+nav #menu-account-logo {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+nav #menu-account-logo:hover {
+  cursor: pointer;
+}
+nav #menu {
   text-align: center;
   width: 80px;
   margin: 2rem 2rem 0rem;
 }
-nav div ul {
+nav #menu ul {
   margin: 4.75rem 0rem;
   display: flex;
   flex-direction: column;
@@ -24,13 +35,13 @@ nav div ul {
   list-style-type: none;
   padding: 0;
 }
-nav div ul li:hover {
+nav #menu ul li:hover {
   cursor: pointer;
 }
-nav div ul li:hover svg path {
+nav #menu ul li:hover svg path {
   fill: #fc4747;
 }
-nav div ul li.active svg path {
+nav #menu ul li.active svg path {
   fill: #ffffff;
 }
 nav div#account-img {

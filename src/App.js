@@ -4,6 +4,7 @@ import NavBar from "./components/NavBar/NavBar";
 import SearchBar from "./components/SearchBar/SearchBar";
 import VideosBox from "./components/VideosBox/VideosBox";
 import Trending from "./components/Trending/Trending";
+import AccountForm from "./components/AccountForm/AccountForm";
 
 export default function App() {
   const [entertainmentData, setEntertainmentData] = useState([]);
@@ -11,6 +12,8 @@ export default function App() {
   const [searchResultData, setSearchResultData] = useState([]);
   const [page, setPage] = useState("Home");
   const [searchQuery, setSearchQuery] = useState("");
+  const [trendingVideos, setTrendingVideos] = useState([]);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   function handleSearchQueryChange(e) {
     setSearchQuery(e.target.value);
@@ -33,6 +36,7 @@ export default function App() {
       } else return item;
     });
     setEntertainmentData(tempDataArr);
+    setTrendingVideos(tempDataArr.slice(0, 5));
   }
 
   function handleSearchQuery(query) {
@@ -110,6 +114,7 @@ export default function App() {
       .then((data) => {
         setEntertainmentData(data);
         setPageData(data);
+        setTrendingVideos(data.slice(0, 5));
       })
       .catch((err) => console.error("Data fetching error: ", err));
   }, []);
@@ -120,56 +125,66 @@ export default function App() {
 
   return (
     <div id="container">
-      <NavBar menuPage={page} onMenuItemClick={handlePageChange}></NavBar>
-      <main>
-        <SearchBar
-          searchQuery={searchQuery}
-          handleSearchQueryChange={handleSearchQueryChange}
-          handleSearchQuery={handleSearchQuery}
-          page={page}
-        />
-        {page === "Home" && searchQuery.length === 0 && (
-          <Trending
-            videosData={entertainmentData}
-            bookmarkClick={handleBookmarkClick}
-          />
-        )}
-        {page !== "Bookmarked" && (
-          <VideosBox
-            sectionTitle={searchQuery.length === 0 ? page : "search"}
-            videosData={searchQuery.length === 0 ? pageData : searchResultData}
-            bookmarkClick={handleBookmarkClick}
-            searchQuery={searchQuery}
-          />
-        )}
+      {page === "account" ? (
+        <AccountForm />
+      ) : (
+        <>
+          <NavBar menuPage={page} onMenuItemClick={handlePageChange}></NavBar>
+          <main>
+            <SearchBar
+              searchQuery={searchQuery}
+              handleSearchQueryChange={handleSearchQueryChange}
+              handleSearchQuery={handleSearchQuery}
+              page={page}
+            />
+            {page === "Home" && searchQuery.length === 0 && (
+              <Trending
+                videosData={trendingVideos}
+                bookmarkClick={handleBookmarkClick}
+              />
+            )}
+            {page !== "Bookmarked" && (
+              <VideosBox
+                sectionTitle={searchQuery.length === 0 ? page : "search"}
+                videosData={
+                  searchQuery.length === 0 ? pageData : searchResultData
+                }
+                bookmarkClick={handleBookmarkClick}
+                searchQuery={searchQuery}
+              />
+            )}
 
-        {page === "Bookmarked" && searchQuery.length === 0 && (
-          <>
-            <VideosBox
-              sectionTitle={"Bookmarked Movies"}
-              videosData={pageData.filter((item) => item.category === "Movie")}
-              bookmarkClick={handleBookmarkClick}
-              searchQuery={searchQuery}
-            />
-            <VideosBox
-              sectionTitle={"Bookmarked TV Series"}
-              videosData={pageData.filter(
-                (item) => item.category === "TV Series"
-              )}
-              bookmarkClick={handleBookmarkClick}
-              searchQuery={searchQuery}
-            />
-          </>
-        )}
-        {page === "Bookmarked" && searchQuery.length !== 0 && (
-          <VideosBox
-            sectionTitle={"search"}
-            videosData={searchResultData}
-            bookmarkClick={handleBookmarkClick}
-            searchQuery={searchQuery}
-          />
-        )}
-      </main>
+            {page === "Bookmarked" && searchQuery.length === 0 && (
+              <>
+                <VideosBox
+                  sectionTitle={"Bookmarked Movies"}
+                  videosData={pageData.filter(
+                    (item) => item.category === "Movie"
+                  )}
+                  bookmarkClick={handleBookmarkClick}
+                  searchQuery={searchQuery}
+                />
+                <VideosBox
+                  sectionTitle={"Bookmarked TV Series"}
+                  videosData={pageData.filter(
+                    (item) => item.category === "TV Series"
+                  )}
+                  bookmarkClick={handleBookmarkClick}
+                  searchQuery={searchQuery}
+                />
+              </>
+            )}
+            {page === "Bookmarked" && searchQuery.length !== 0 && (
+              <VideosBox
+                sectionTitle={"search"}
+                videosData={searchResultData}
+                bookmarkClick={handleBookmarkClick}
+                searchQuery={searchQuery}
+              />
+            )}
+          </main>
+        </>
+      )}
     </div>
   );
 }

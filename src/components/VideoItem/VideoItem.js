@@ -20,7 +20,7 @@ export default function VideoItem({
   const { image } = useImage(imgPath);
 
   return (
-    <div className="video-item">
+    <div className={`video-item ${trending ? "trend-item" : ""}`}>
       <div className="video-item-thumb">
         <img src={image} alt={title} />
         <div className="bookmark-bg" onClick={() => bookmarkClick(title)}>
@@ -33,12 +33,12 @@ export default function VideoItem({
             />
           </svg>
         </div>
-        <button type="button" className={`${trending && "trend-play"}`}>
+        <button type="button" className={`${trending ? "trend-play" : ""}`}>
           <img src={Play} alt="play video" />
           <h5>Play</h5>
         </button>
       </div>
-      <div className={`video-item-info ${trending && "trend-info"}`}>
+      <div className={`video-item-info ${trending ? "trend-info" : ""}`}>
         <p>
           <span className="small">{`${year}`}</span>
           <span> &sdot; </span>
@@ -51,7 +51,7 @@ export default function VideoItem({
           <span> {rating}</span>
         </p>
       </div>
-      <h5 className={`video-item-title ${trending && "trend-title"}`}>
+      <h5 className={`video-item-title ${trending ? "trend-title" : ""}`}>
         {title}
       </h5>
     </div>

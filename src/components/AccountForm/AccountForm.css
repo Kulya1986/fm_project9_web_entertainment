@@ -1,0 +1,101 @@
+#account-page-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-right: 2rem;
+  width: 100%;
+  height: auto;
+  padding-top: 3rem;
+}
+
+#account-form-container {
+  margin-top: 5rem;
+  padding: 2rem;
+  width: 400px;
+  background-color: #161d2f;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+#account-form-container input:hover,
+#account-form-container label:hover {
+  cursor: pointer;
+}
+#account-form-container button {
+  margin-top: 1rem;
+  background-color: #fc4747;
+  border: none;
+  border-radius: 6px;
+  padding: 14px 0px;
+  height: auto;
+  font-size: 15px;
+  font-family: "Outfit Light";
+  letter-spacing: 0px;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+}
+#account-form-container button:hover {
+  cursor: pointer;
+  background-color: #ffffff;
+  color: #161d2f;
+}
+#account-form-container p {
+  margin: 0;
+  text-align: center;
+}
+#account-form-container p button {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: none;
+  background-color: transparent;
+  color: #fc4747;
+  margin: 0 0 0 0.5rem;
+  padding: 0;
+  padding-inline: 0;
+  font-size: 15px;
+}
+#account-form-container p button:hover {
+  cursor: pointer;
+}
+
+#account-form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+#account-form div {
+  height: 37px;
+  position: relative;
+  margin-bottom: 1.5rem;
+  padding: 0;
+  background-color: transparent;
+}
+#account-form div input {
+  width: calc(100% - 18px);
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #5a698f;
+  background-color: transparent;
+  color: #ffffff;
+  caret-color: #fc4747;
+  font-size: 15px;
+  font-family: "Outfit Light";
+  letter-spacing: 0px;
+}
+#account-form div input:focus-visible {
+  outline: none;
+  outline-offset: 0;
+  border-bottom: 1px solid #ffffff;
+}
+#account-form div .error-msg {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  color: #fc4747;
+}/*# sourceMappingURL=AccountForm.css.map */

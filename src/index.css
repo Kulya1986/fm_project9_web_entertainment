@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  padding: 2rem;
+  padding: 2rem 0rem 2rem 2rem;
   font-family: "Outfit Light", "Outfit Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -24,6 +24,7 @@ code {
 h2 {
   font-size: 32px;
   font-family: "Outfit Light";
+  letter-spacing: -0.5px;
 }
 
 h3 {
@@ -42,7 +43,8 @@ h5 {
   margin: 0;
 }
 
-p {
+p,
+a {
   font-size: 15px;
   font-family: "Outfit Light";
 }
