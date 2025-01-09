@@ -44,6 +44,10 @@
     }
   }
 
+  #logged-msg {
+    text-align: center;
+  }
+
   p {
     margin: 0;
     text-align: center;
@@ -59,6 +63,9 @@
       font-size: $app-text-m;
       &:hover {
         cursor: pointer;
+        background-color: transparent;
+        color: $app-color-red;
+        text-decoration: underline;
       }
     }
   }
@@ -70,7 +77,6 @@
   flex-wrap: nowrap;
 
   div {
-    // display: block;
     height: 37px;
     position: relative;
     margin-bottom: 1.5rem;

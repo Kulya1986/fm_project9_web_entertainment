@@ -2,22 +2,13 @@ import React, { useState } from "react";
 import AccountLogo from "./../../assets/logo.svg";
 import "./AccountForm.css";
 
-export default function AccountForm({
-  loggedIn,
-  //   emailAddress,
-  //   password,
-  //   passwordRepeat,
-  //   handleEmailAddressChange,
-  //   handlePasswordChange,
-  //   handlePasswordRepeatChange,
-  //   handleFormSubmit,
-}) {
+export default function AccountForm({ loggedIn }) {
   const [newUser, setNewUser] = useState(true);
   const [emailAddress, setEmailAddress] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [errMsg, setErrMsg] = useState({
-    emailErrMsg: "Can't be empty",
+    emailErrMsg: "",
     passwordErrMsg: "",
     repeatPassErrMsg: "",
   });
@@ -36,7 +27,10 @@ export default function AccountForm({
 
   function handleNewUserChange() {
     setNewUser((curr) => !curr);
-    if (repeatPassword) setRepeatPassword("");
+    if (repeatPassword) {
+      setRepeatPassword("");
+      clearRepeatPassError();
+    }
   }
 
   function clearEmailError() {
@@ -56,71 +50,57 @@ export default function AccountForm({
   function clearRepeatPassError() {
     setErrMsg({
       ...errMsg,
-      passwordErrMsg: "",
+      repeatPassErrMsg: "",
     });
   }
 
   function handleFieldsValidation() {
     const emailExp = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
     const passwordExp = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?!.*\W).{6,}$/;
+    let emailError, passwordError, repeatPasswordError;
 
     //validate email field
-    if (emailAddress.length === 0)
-      setErrMsg({ ...errMsg, emailErrMsg: "Can't be empty" });
-    else if (emailAddress.search(emailExp) !== 0)
-      setErrMsg({
-        ...errMsg,
-        emailErrMsg: "Use 'name@gmail.com'",
-      });
-    else
-      setErrMsg({
-        ...errMsg,
-        emailErrMsg: "",
-      });
+    if (emailAddress.length === 0) {
+      //   console.log("Email empty");
+      emailError = "Can't be empty";
+    } else if (emailAddress.search(emailExp) !== 0) {
+      //   console.log("email wrong format");
+      emailError = "Use 'name@gmail.com'";
+    } else emailError = "";
 
     //validate password field
 
-    if (password.length === 0)
-      setErrMsg({ ...errMsg, passwordErrMsg: "Can't be empty" });
-    else if (password.length < 7)
-      setErrMsg({
-        ...errMsg,
-        passwordErrMsg: "6 symbols min",
-      });
-    else if (password.search(passwordExp) !== 0)
-      setErrMsg({
-        ...errMsg,
-        passwordErrMsg: "Use [0-9],[A-Za-z]",
-      });
-    else
-      setErrMsg({
-        ...errMsg,
-        passwordErrMsg: "",
-      });
+    if (password.length === 0) {
+      //   console.log("Password empty");
+      passwordError = "Can't be empty";
+    } else if (password.length < 6) {
+      //   console.log("Pass length");
+      passwordError = "6 symbols min";
+    } else if (password.search(passwordExp) !== 0) {
+      //   console.log("Pass format");
+      passwordError = "Use [0-9],[A-Za-z]";
+    } else passwordError = "";
 
     //validate repeate password field
 
-    if (repeatPassword.length === 0)
-      setErrMsg({ ...errMsg, repeatPassErrMsg: "Can't be empty" });
-    else if (password !== repeatPassword)
-      setErrMsg({
-        ...errMsg,
-        repeatPassErrMsg: "Passwords must match",
-      });
-    else
-      setErrMsg({
-        ...errMsg,
-        passwordErrMsg: "",
-      });
+    if (repeatPassword.length === 0) {
+      //   console.log("Repeat empty");
+      repeatPasswordError = "Can't be empty";
+    } else if (password !== repeatPassword) {
+      //   console.log("Don't match");
+      repeatPasswordError = "Passwords must match";
+    } else repeatPasswordError = "";
+
+    setErrMsg({
+      emailErrMsg: emailError,
+      passwordErrMsg: passwordError,
+      repeatPassErrMsg: repeatPasswordError,
+    });
   }
 
   function handleFormSubmit() {
     handleFieldsValidation();
     console.log({
-      email: emailAddress,
-      password: password,
-    });
-    alert({
       email: emailAddress,
       password: password,
     });
@@ -133,7 +113,7 @@ export default function AccountForm({
           <img src={AccountLogo} alt="logo" />
         </div>
         <div id="account-form-container">
-          <h2>You are already logged in</h2>
+          <h2 id="logged-msg">You are already logged in</h2>
         </div>
       </div>
     );
@@ -168,7 +148,7 @@ export default function AccountForm({
           <div>
             <input
               aria-label="password-field"
-              type="text"
+              type="password"
               id="password-field"
               name="password-field"
               placeholder={"Password"}
@@ -185,7 +165,7 @@ export default function AccountForm({
             <div>
               <input
                 aria-label="repeat-password-field"
-                type="text"
+                type="password"
                 id="repeat-password-field"
                 name="repeat-password-field"
                 placeholder={"Repeat password"}

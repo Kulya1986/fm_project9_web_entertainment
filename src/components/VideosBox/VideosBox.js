@@ -18,18 +18,20 @@ export default function VideosBox({
           : sectionTitle}
       </h2>
       <div className="videos-list">
-        {videosData.map((item, index) => (
-          <VideoItem
-            key={index}
-            title={item.title}
-            category={item.category}
-            year={item.category}
-            rating={item.rating}
-            isBookmarked={item.isBookmarked}
-            thumbnails={item.thumbnail.regular}
-            bookmarkClick={bookmarkClick}
-          />
-        ))}
+        {videosData.length > 0
+          ? videosData.map((item, index) => (
+              <VideoItem
+                key={index}
+                title={item.title}
+                category={item.category}
+                year={item.category}
+                rating={item.rating}
+                isBookmarked={item.isBookmarked}
+                thumbnails={item.thumbnail.regular}
+                bookmarkClick={bookmarkClick}
+              />
+            ))
+          : "No bookmarked videos"}
       </div>
     </section>
   );

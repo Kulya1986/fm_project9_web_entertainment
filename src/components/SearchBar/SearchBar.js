@@ -5,7 +5,6 @@ import "./SearchBar.css";
 export default function SearchBar({
   searchQuery,
   handleSearchQueryChange,
-  handleSearchQuery,
   page,
 }) {
   return (

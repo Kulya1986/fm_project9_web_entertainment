@@ -41,6 +41,9 @@
   background-color: #ffffff;
   color: #161d2f;
 }
+#account-form-container #logged-msg {
+  text-align: center;
+}
 #account-form-container p {
   margin: 0;
   text-align: center;
@@ -59,6 +62,9 @@
 }
 #account-form-container p button:hover {
   cursor: pointer;
+  background-color: transparent;
+  color: #fc4747;
+  text-decoration: underline;
 }
 
 #account-form {
