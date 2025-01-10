@@ -1,58 +1,58 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import AccountLogo from "./../../assets/logo.svg";
 import "./AccountForm.css";
 
+const initialState = {
+  newUser: true,
+  emailAddress: "",
+  password: "",
+  repeatPassword: "",
+  errMsg: { emailErrMsg: "", passwordErrMsg: "", repeatPassErrMsg: "" },
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "newUserChange":
+      return {
+        ...state,
+        newUser: !state.newUser,
+        repeatPassword: "",
+        errMsg: { ...state.errMsg, repeatPassErrMsg: "" },
+      };
+    case "emailAddressChange":
+      return { ...state, emailAddress: action.payload };
+    case "passwordChange":
+      return { ...state, password: action.payload };
+    case "repeatPasswordChange":
+      return { ...state, repeatPassword: action.payload };
+    case "clearEmailError":
+      return {
+        ...state,
+        errMsg: { ...state.errMsg, emailErrMsg: "" },
+      };
+    case "clearPasswordError":
+      return {
+        ...state,
+        errMsg: { ...state.errMsg, passwordErrMsg: "" },
+      };
+    case "clearRepeatPassError":
+      return {
+        ...state,
+        errMsg: { ...state.errMsg, repeatPassErrMsg: "" },
+      };
+    case "setErrors":
+      return {
+        ...state,
+        errMsg: action.payload,
+      };
+    default:
+      throw new Error("Unknown action type");
+  }
+}
+
 export default function AccountForm({ loggedIn }) {
-  const [newUser, setNewUser] = useState(true);
-  const [emailAddress, setEmailAddress] = useState("");
-  const [password, setPassword] = useState("");
-  const [repeatPassword, setRepeatPassword] = useState("");
-  const [errMsg, setErrMsg] = useState({
-    emailErrMsg: "",
-    passwordErrMsg: "",
-    repeatPassErrMsg: "",
-  });
-
-  function handleEmailAddressChange(e) {
-    setEmailAddress(e.target.value);
-  }
-
-  function handlePasswordChange(e) {
-    setPassword(e.target.value);
-  }
-
-  function handleRepeatPasswordChange(e) {
-    setRepeatPassword(e.target.value);
-  }
-
-  function handleNewUserChange() {
-    setNewUser((curr) => !curr);
-    if (repeatPassword) {
-      setRepeatPassword("");
-      clearRepeatPassError();
-    }
-  }
-
-  function clearEmailError() {
-    setErrMsg({
-      ...errMsg,
-      emailErrMsg: "",
-    });
-  }
-
-  function clearPasswordError() {
-    setErrMsg({
-      ...errMsg,
-      passwordErrMsg: "",
-    });
-  }
-
-  function clearRepeatPassError() {
-    setErrMsg({
-      ...errMsg,
-      repeatPassErrMsg: "",
-    });
-  }
+  const [formState, dispatch] = useReducer(reducer, initialState);
+  const { newUser, emailAddress, password, repeatPassword, errMsg } = formState;
 
   function handleFieldsValidation() {
     const emailExp = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
@@ -91,10 +91,13 @@ export default function AccountForm({ loggedIn }) {
       repeatPasswordError = "Passwords must match";
     } else repeatPasswordError = "";
 
-    setErrMsg({
-      emailErrMsg: emailError,
-      passwordErrMsg: passwordError,
-      repeatPassErrMsg: repeatPasswordError,
+    dispatch({
+      type: "setErrors",
+      payload: {
+        emailErrMsg: emailError,
+        passwordErrMsg: passwordError,
+        repeatPassErrMsg: repeatPasswordError,
+      },
     });
   }
 
@@ -138,8 +141,13 @@ export default function AccountForm({ loggedIn }) {
               name="email-field"
               placeholder={"Email address"}
               value={emailAddress}
-              onChange={(e) => handleEmailAddressChange(e)}
-              onInput={clearEmailError}
+              onChange={(e) =>
+                dispatch({
+                  type: "emailAddressChange",
+                  payload: e.target.value,
+                })
+              }
+              onInput={() => dispatch({ type: "clearEmailError" })}
             />
             {errMsg.emailErrMsg.length > 0 && (
               <p className="error-msg">{errMsg.emailErrMsg}</p>
@@ -153,8 +161,13 @@ export default function AccountForm({ loggedIn }) {
               name="password-field"
               placeholder={"Password"}
               value={password}
-              onChange={(e) => handlePasswordChange(e)}
-              onInput={clearPasswordError}
+              onChange={(e) =>
+                dispatch({
+                  type: "passwordChange",
+                  payload: e.target.value,
+                })
+              }
+              onInput={() => dispatch({ type: "clearPasswordError" })}
             />
             {errMsg.passwordErrMsg.length > 0 && (
               <p className="error-msg">{errMsg.passwordErrMsg}</p>
@@ -170,8 +183,13 @@ export default function AccountForm({ loggedIn }) {
                 name="repeat-password-field"
                 placeholder={"Repeat password"}
                 value={repeatPassword}
-                onChange={(e) => handleRepeatPasswordChange(e)}
-                onInput={clearRepeatPassError}
+                onChange={(e) =>
+                  dispatch({
+                    type: "repeatPasswordChange",
+                    payload: e.target.value,
+                  })
+                }
+                onInput={() => dispatch({ type: "clearRepeatPassError" })}
               />
               {errMsg.repeatPassErrMsg.length > 0 && (
                 <p className="error-msg">{errMsg.repeatPassErrMsg}</p>
@@ -190,7 +208,7 @@ export default function AccountForm({ loggedIn }) {
         </div>
         <p className="form-alternative">
           {newUser ? "Already have an account?" : "Don't have an account"}
-          <button onClick={handleNewUserChange}>
+          <button onClick={() => dispatch({ type: "newUserChange" })}>
             {newUser ? "Login" : "Sign Up"}
           </button>
         </p>
