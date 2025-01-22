@@ -1,8 +1,11 @@
 import React, { useLayoutEffect, useRef, useState } from "react";
 import VideoItem from "../VideoItem/VideoItem";
 import "./Trending.css";
+import { useEntertainment } from "../../contexts/EntertainmentContext";
 
-export default function Trending({ videosData, bookmarkClick }) {
+export default function Trending() {
+  const { entertainmentData } = useEntertainment();
+  const videosData = entertainmentData.filter((item) => item.isTrending);
   const carouselEl = useRef(null);
   const [translateEnd, setTranslateEnd] = useState("");
 
@@ -37,7 +40,6 @@ export default function Trending({ videosData, bookmarkClick }) {
               rating={item.rating}
               isBookmarked={item.isBookmarked}
               thumbnails={item.thumbnail.trending}
-              bookmarkClick={bookmarkClick}
               trending={true}
             />
           ))}

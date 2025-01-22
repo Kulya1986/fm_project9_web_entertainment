@@ -1,13 +1,15 @@
 import React from "react";
 import "./NavBar.css";
 import useImage from "./../../useImage";
+import { useEntertainment } from "../../contexts/EntertainmentContext";
 
-export default function NavBar({ menuPage, onMenuItemClick }) {
+export default function NavBar() {
   const { loading, image } = useImage("image-avatar.png");
+  const { page, handlePageChange } = useEntertainment();
   return (
     <nav>
       <div id="menu">
-        <div id="menu-account-logo" onClick={() => onMenuItemClick("account")}>
+        <div id="menu-account-logo" onClick={() => handlePageChange("account")}>
           <svg width="33" height="27" xmlns="http://www.w3.org/2000/svg">
             <path
               d="m26.463.408 3.2 6.4h-4.8l-3.2-6.4h-3.2l3.2 6.4h-4.8l-3.2-6.4h-3.2l3.2 6.4h-4.8l-3.2-6.4h-1.6a3.186 3.186 0 0 0-3.184 3.2l-.016 19.2a3.2 3.2 0 0 0 3.2 3.2h25.6a3.2 3.2 0 0 0 3.2-3.2V.408h-6.4Z"
@@ -19,8 +21,8 @@ export default function NavBar({ menuPage, onMenuItemClick }) {
         <ul id="menu-tabs">
           <li
             id="menu-tabs-home"
-            className={menuPage === "Home" ? "active" : ""}
-            onClick={() => onMenuItemClick("Home")}
+            className={page === "Home" ? "active" : ""}
+            onClick={() => handlePageChange("Home")}
           >
             <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -31,8 +33,8 @@ export default function NavBar({ menuPage, onMenuItemClick }) {
           </li>
           <li
             id="menu-tabs-movies"
-            className={menuPage === "Movies" ? "active" : ""}
-            onClick={() => onMenuItemClick("Movies")}
+            className={page === "Movies" ? "active" : ""}
+            onClick={() => handlePageChange("Movies")}
           >
             <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -43,8 +45,8 @@ export default function NavBar({ menuPage, onMenuItemClick }) {
           </li>
           <li
             id="menu-tabs-tv-series"
-            className={menuPage === "TV Series" ? "active" : ""}
-            onClick={() => onMenuItemClick("TV Series")}
+            className={page === "TV Series" ? "active" : ""}
+            onClick={() => handlePageChange("TV Series")}
           >
             <svg width="20" height="20" xmlns="http://www.w3.org/2000/svg">
               <path
@@ -55,8 +57,8 @@ export default function NavBar({ menuPage, onMenuItemClick }) {
           </li>
           <li
             id="menu-tabs-bookmark"
-            className={menuPage === "Bookmarked" ? "active" : ""}
-            onClick={() => onMenuItemClick("Bookmarked")}
+            className={page === "Bookmarked" ? "active" : ""}
+            onClick={() => handlePageChange("Bookmarked")}
           >
             <svg width="17" height="20" xmlns="http://www.w3.org/2000/svg">
               <path

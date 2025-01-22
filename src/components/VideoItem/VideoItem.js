@@ -4,6 +4,7 @@ import CategoryTV from "./../../assets/icon-category-tv.svg";
 import Play from "./../../assets/icon-play.svg";
 import useImage from "./../../useImage";
 import "./VideoItem.css";
+import { useEntertainment } from "../../contexts/EntertainmentContext";
 
 export default function VideoItem({
   title,
@@ -12,18 +13,17 @@ export default function VideoItem({
   rating,
   isBookmarked,
   thumbnails,
-  bookmarkClick,
   trending = false,
 }) {
   const imgPath = thumbnails.large.slice(9);
-  console.log(imgPath);
   const { image } = useImage(imgPath);
+  const { handleBookmarkClick } = useEntertainment();
 
   return (
     <div className={`video-item ${trending ? "trend-item" : ""}`}>
       <div className="video-item-thumb">
         <img src={image} alt={title} />
-        <div className="bookmark-bg" onClick={() => bookmarkClick(title)}>
+        <div className="bookmark-bg" onClick={() => handleBookmarkClick(title)}>
           <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg">
             <path
               d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z"

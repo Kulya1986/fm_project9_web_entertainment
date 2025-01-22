@@ -1,0 +1,69 @@
+@import "./../../_variables.scss";
+
+nav {
+  max-width: 6rem;
+  width: 6rem;
+  height: 60rem;
+  border-radius: 20px;
+  background-color: $app-color-semi-dark-blue;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: 36px;
+
+  #menu-account-logo {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+  #menu-account-logo:hover {
+    cursor: pointer;
+  }
+
+  #menu {
+    text-align: center;
+    width: 80px;
+    margin: 2rem 2rem 0rem;
+    ul {
+      margin: 4.75rem 0rem;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: nowrap;
+      height: 200px;
+      justify-content: space-between;
+      list-style-type: none;
+      padding: 0;
+
+      li:hover {
+        cursor: pointer;
+        svg {
+          path {
+            fill: $app-color-red;
+          }
+        }
+      }
+      li.active {
+        svg {
+          path {
+            fill: $app-color-white;
+          }
+        }
+      }
+    }
+  }
+  div#account-img {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border: 2px solid $app-color-white;
+    border-radius: 50%;
+    margin: 0rem 2rem 2rem;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
+}

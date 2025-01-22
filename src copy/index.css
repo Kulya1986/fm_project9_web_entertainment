@@ -1,0 +1,55 @@
+body {
+  margin: 0;
+  padding: 2rem 0rem 2rem 2rem;
+  font-family: "Outfit Light", "Outfit Medium", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #10141e;
+  color: #ffffff;
+  box-sizing: content-box;
+}
+
+@font-face {
+  font-family: "Outfit Light";
+  src: url("./fonts/Outfit-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Outfit Medium";
+  src: url("./fonts/Outfit-Medium.ttf") format("truetype");
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+h2 {
+  font-size: 32px;
+  font-family: "Outfit Light";
+  letter-spacing: -0.5px;
+}
+
+h3 {
+  font-size: 24px;
+  font-family: "Outfit Light";
+}
+
+h4 {
+  font-size: 24px;
+  font-family: "Outfit Medium";
+}
+
+h5 {
+  font-size: 18px;
+  font-family: "Outfit Medium";
+  margin: 0;
+}
+
+p,
+a {
+  font-size: 15px;
+  font-family: "Outfit Light";
+}
+
+.small {
+  font-size: 13px;
+  font-family: "Outfit Light";
+}/*# sourceMappingURL=index.css.map */

@@ -1,12 +1,10 @@
 import React from "react";
 import Magnifier from "./../../assets/icon-search.svg";
 import "./SearchBar.css";
+import { useEntertainment } from "../../contexts/EntertainmentContext";
 
-export default function SearchBar({
-  searchQuery,
-  handleSearchQueryChange,
-  page,
-}) {
+export default function SearchBar() {
+  const { searchQuery, page, handleSearchQueryChange } = useEntertainment();
   return (
     <div id="search-form">
       <label htmlFor="search-field">

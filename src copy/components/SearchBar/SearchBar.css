@@ -1,0 +1,34 @@
+#search-form {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  margin-top: 2rem;
+}
+#search-form label {
+  padding-right: 1.5rem;
+  padding-top: 6px;
+}
+#search-form input {
+  padding: 0px 0px 14px;
+  margin-right: 36px;
+  width: calc(100% - 56px);
+  background: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 1px solid #10141e;
+  font-size: 32px;
+  font-family: "Outfit Light";
+  color: #ffffff;
+  caret-color: #fc4747;
+}
+#search-form input:focus-visible {
+  outline: none;
+  outline-offset: 0;
+  border-bottom: 1px solid #5a698f;
+}
+#search-form input:hover,
+#search-form label:hover {
+  cursor: pointer;
+}/*# sourceMappingURL=SearchBar.css.map */

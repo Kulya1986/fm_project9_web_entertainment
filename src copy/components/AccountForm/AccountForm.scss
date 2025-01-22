@@ -1,0 +1,114 @@
+@import "./../../variables";
+#account-page-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-right: 2rem;
+  width: 100%;
+  height: auto;
+  padding-top: 3rem;
+}
+
+#account-form-container {
+  margin-top: 5rem;
+  padding: 2rem;
+  width: 400px;
+  background-color: $app-color-semi-dark-blue;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+
+  input:hover,
+  label:hover {
+    cursor: pointer;
+  }
+  button {
+    margin-top: 1rem;
+    background-color: $app-color-red;
+    border: none;
+    border-radius: 6px;
+    padding: 14px 0px;
+    height: auto;
+    font-size: $app-text-m;
+    font-family: "Outfit Light";
+    letter-spacing: 0px;
+    margin-bottom: 1.5rem;
+    color: $app-color-white;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $app-color-white;
+      color: $app-color-semi-dark-blue;
+    }
+  }
+
+  #logged-msg {
+    text-align: center;
+  }
+
+  p {
+    margin: 0;
+    text-align: center;
+
+    button {
+      appearance: none;
+      border: none;
+      background-color: transparent;
+      color: $app-color-red;
+      margin: 0 0 0 0.5rem;
+      padding: 0;
+      padding-inline: 0;
+      font-size: $app-text-m;
+      &:hover {
+        cursor: pointer;
+        background-color: transparent;
+        color: $app-color-red;
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+#account-form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+
+  div {
+    height: 37px;
+    position: relative;
+    margin-bottom: 1.5rem;
+    padding: 0;
+    background-color: transparent;
+
+    input {
+      width: calc(100% - 18px);
+      padding-left: 1rem;
+      padding-bottom: 1rem;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      border-bottom: 1px solid $app-color-greyish-blue;
+      background-color: transparent;
+      color: $app-color-white;
+      caret-color: $app-color-red;
+      font-size: $app-text-m;
+      font-family: "Outfit Light";
+      letter-spacing: 0px;
+    }
+    input:focus-visible {
+      outline: none;
+      outline-offset: 0;
+      border-bottom: 1px solid $app-color-white;
+    }
+
+    .error-msg {
+      position: absolute;
+      right: 16px;
+      bottom: 16px;
+      color: $app-color-red;
+    }
+  }
+}

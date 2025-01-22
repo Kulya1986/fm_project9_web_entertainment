@@ -1,0 +1,100 @@
+.video-item {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  position: relative;
+}
+.video-item .video-item-thumb {
+  width: auto;
+}
+.video-item .video-item-thumb img {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+}
+.video-item .video-item-thumb button {
+  display: none;
+  position: absolute;
+  top: calc(50% - 48px);
+  left: calc(50% - 58px);
+  height: 3rem;
+  width: 7.25rem;
+  border: none;
+  border-radius: 28.5px;
+  background-color: rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+}
+.video-item .video-item-thumb button img {
+  display: block;
+  height: 30px;
+  width: 30px;
+  margin: 4px 19px 4px 4px;
+}
+.video-item .video-item-thumb .bookmark-bg {
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: rgba(16, 20, 30, 0.5);
+  text-align: center;
+}
+.video-item .video-item-thumb .bookmark-bg svg {
+  padding-top: 9px;
+}
+.video-item .video-item-thumb .bookmark-bg:hover {
+  background-color: #ffffff;
+}
+.video-item .video-item-thumb .bookmark-bg:hover svg path {
+  stroke: #10141e;
+}
+.video-item .video-item-thumb .trend-play {
+  top: calc(50% - 24px);
+}
+.video-item .video-item-thumb:hover {
+  cursor: pointer;
+}
+.video-item .video-item-thumb:hover button {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  cursor: pointer;
+}
+.video-item .video-item-info {
+  color: #ffffff;
+}
+.video-item .video-item-info p {
+  margin: 0.5rem 0rem 0rem;
+}
+.video-item .video-item-title {
+  color: #ffffff;
+  margin: 0.5rem 0rem 0rem;
+}
+.video-item .trend-info {
+  position: absolute;
+  left: 24px;
+  bottom: 46px;
+}
+.video-item .trend-title {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+}
+
+.video-item:hover .video-item-thumb {
+  cursor: pointer;
+}
+.video-item:hover .video-item-thumb button {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  cursor: pointer;
+}
+
+.trend-item {
+  min-width: 470px;
+  width: 470px;
+}/*# sourceMappingURL=VideoItem.css.map */

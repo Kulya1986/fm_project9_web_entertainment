@@ -1,0 +1,13 @@
+@keyframes carousel {
+  to {
+    transform: translateX(var(--translateEnd));
+  }
+}
+.trending-list {
+  overflow: hidden;
+}
+.trending-list #trending-list-holder {
+  width: 2510px;
+  display: flex;
+  gap: 40px;
+}/*# sourceMappingURL=Trending.css.map */

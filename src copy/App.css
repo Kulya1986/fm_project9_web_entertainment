@@ -1,0 +1,11 @@
+#container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+#container main {
+  width: calc(100% - 132px);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}/*# sourceMappingURL=App.css.map */

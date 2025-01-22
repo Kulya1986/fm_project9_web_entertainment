@@ -1,0 +1,17 @@
+@keyframes carousel {
+  to {
+    transform: translateX(var(--translateEnd));
+  }
+}
+
+.trending-list {
+  overflow: hidden;
+
+  #trending-list-holder {
+    // --translateEnd: -967px;
+    width: 2510px;
+    display: flex;
+    gap: 40px;
+    // animation: carousel 50s ease-in-out 5s infinite alternate forwards;
+  }
+}
