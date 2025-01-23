@@ -41,7 +41,7 @@ nav #menu ul li:hover {
 nav #menu ul li:hover svg path {
   fill: #fc4747;
 }
-nav #menu ul li.active svg path {
+nav #menu ul a.active svg path {
   fill: #ffffff;
 }
 nav div#account-img {

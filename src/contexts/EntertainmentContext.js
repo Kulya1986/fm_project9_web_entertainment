@@ -5,8 +5,6 @@ const EntertainmentContext = createContext();
 const initialState = {
   entertainmentData: [],
   searchResultData: [],
-  page: "Home",
-  sectionTitle: "Recommended for you",
   searchQuery: "",
   error: "",
 };
@@ -16,11 +14,9 @@ function reducer(state, action) {
     case "page_change":
       return {
         ...state,
-        page: action.payload,
+
         searchQuery: "",
         searchResultData: [],
-        sectionTitle:
-          action.payload === "Home" ? "Recommended for you" : action.payload,
       };
     case "entertaiment_data_load":
       return { ...state, error: "", entertainmentData: action.payload };
@@ -41,7 +37,6 @@ function reducer(state, action) {
         ...state,
         searchQuery: action.payload.query,
         searchResultData: action.payload.searchRes,
-        sectionTitle: `Found ${action.payload.resNum} results for '${action.payload.query}'`,
       };
     default:
       throw new Error("Unknown action type");
@@ -53,8 +48,7 @@ function EntertainmentProvider({ children }) {
     {
       entertainmentData,
       searchResultData,
-      page,
-      sectionTitle,
+
       searchQuery,
       error,
     },
@@ -70,8 +64,8 @@ function EntertainmentProvider({ children }) {
     dispatch({ type: "search", payload: { query, searchRes, resNum } });
   }
 
-  function handlePageChange(name) {
-    dispatch({ type: "page_change", payload: name });
+  function handlePageChange() {
+    dispatch({ type: "page_change" });
   }
 
   function handleBookmarkClick(name) {
@@ -107,8 +101,7 @@ function EntertainmentProvider({ children }) {
         entertainmentData,
         searchQuery,
         searchResultData,
-        page,
-        sectionTitle,
+
         error,
         handleSearchQueryChange,
         handleBookmarkClick,

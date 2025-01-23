@@ -3,8 +3,8 @@ import Magnifier from "./../../assets/icon-search.svg";
 import "./SearchBar.css";
 import { useEntertainment } from "../../contexts/EntertainmentContext";
 
-export default function SearchBar() {
-  const { searchQuery, page, handleSearchQueryChange } = useEntertainment();
+export default function SearchBar({ inputPlaceholder }) {
+  const { searchQuery, handleSearchQueryChange } = useEntertainment();
   return (
     <div id="search-form">
       <label htmlFor="search-field">
@@ -14,15 +14,7 @@ export default function SearchBar() {
         type="text"
         id="search-field"
         name="search-field"
-        placeholder={
-          page === "Home"
-            ? "Search for movies or TV series"
-            : page === "Movies"
-            ? "Search for movies"
-            : page === "TV Series"
-            ? "Search for TV series"
-            : "Search for bookmarked shows"
-        }
+        placeholder={inputPlaceholder}
         value={searchQuery}
         onChange={(e) => handleSearchQueryChange(e)}
       />
