@@ -97,4 +97,35 @@
 .trend-item {
   min-width: 470px;
   width: 470px;
+}
+
+@media only screen and (max-width: 768px) {
+  .video-item:hover .video-item-thumb {
+    cursor: none;
+  }
+  .video-item:hover .video-item-thumb button {
+    display: none;
+    cursor: none;
+  }
+}
+@media only screen and (max-width: 480px) {
+  .video-item .video-item-thumb .bookmark-bg {
+    top: 0.5rem;
+    right: 0.5rem;
+  }
+  .video-item .video-item-title {
+    margin-top: 0.25rem;
+  }
+  .video-item .trend-title {
+    left: 16px;
+    bottom: 16px;
+  }
+  .video-item .trend-info {
+    left: 16px;
+    bottom: 34px;
+  }
+  .trend-item {
+    min-width: 240px;
+    width: 240px;
+  }
 }/*# sourceMappingURL=VideoItem.css.map */

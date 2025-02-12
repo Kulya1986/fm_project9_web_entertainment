@@ -15,3 +15,13 @@
     // animation: carousel 50s ease-in-out 5s infinite alternate forwards;
   }
 }
+
+@media only screen and (max-width: 480px) {
+  .trending-list {
+    margin-left: 16px;
+    #trending-list-holder {
+      width: 1264px;
+      gap: 16px;
+    }
+  }
+}

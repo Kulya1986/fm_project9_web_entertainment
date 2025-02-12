@@ -44,7 +44,7 @@ export default function VideosBox({ page, section }) {
                 key={index}
                 title={item.title}
                 category={item.category}
-                year={item.category}
+                year={item.year}
                 rating={item.rating}
                 isBookmarked={item.isBookmarked}
                 thumbnails={item.thumbnail.regular}

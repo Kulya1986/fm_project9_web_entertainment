@@ -60,3 +60,25 @@ a {
   font-size: $app-text-s;
   font-family: "Outfit Light";
 }
+
+@media only screen and (max-width: 768px) {
+  body {
+    padding: 1.5rem 0rem 1.5rem 1.5rem;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  body {
+    padding: 0rem;
+  }
+  h2 {
+    font-size: $app-heading-mobile-h2;
+    letter-spacing: -0.31px;
+  }
+  h5 {
+    font-size: $app-heading-mobile-h5;
+  }
+  .small {
+    font-size: $app-text-mobile-s;
+  }
+}

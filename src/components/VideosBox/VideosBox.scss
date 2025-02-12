@@ -3,5 +3,28 @@
   column-gap: 40px;
   row-gap: 32px;
   margin-right: 36px;
-  grid-template-columns: repeat(4, minmax(280px, 1fr));
+  // grid-template-columns: repeat(4, minmax(280px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media only screen and (max-width: 768px) {
+  .videos-list {
+    grid-template-columns: repeat(3, 1fr);
+    // grid-template-columns: repeat(3, minmax(220px, 1fr));
+    column-gap: 28px;
+    row-gap: 24px;
+    margin-right: 24px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .videos-list {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+  section > h2 {
+    margin-left: 16px;
+  }
 }

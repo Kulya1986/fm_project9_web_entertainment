@@ -11,7 +11,9 @@ export default function Trending() {
 
   useLayoutEffect(() => {
     const containerWidth = carouselEl.current.clientWidth;
-    const animationEndPoint = containerWidth - 2510 - 36;
+    const holderWidth = containerWidth > 480 ? 2510 : 1264;
+    const marginRight = containerWidth > 480 ? 36 : 16;
+    const animationEndPoint = containerWidth - holderWidth - marginRight;
     setTranslateEnd(`${animationEndPoint}px`);
   }, [videosData]);
 
@@ -36,7 +38,7 @@ export default function Trending() {
               key={index}
               title={item.title}
               category={item.category}
-              year={item.category}
+              year={item.year}
               rating={item.rating}
               isBookmarked={item.isBookmarked}
               thumbnails={item.thumbnail.trending}

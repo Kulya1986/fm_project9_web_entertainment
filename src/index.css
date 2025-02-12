@@ -52,4 +52,25 @@ a {
 .small {
   font-size: 13px;
   font-family: "Outfit Light";
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    padding: 1.5rem 0rem 1.5rem 1.5rem;
+  }
+}
+@media only screen and (max-width: 480px) {
+  body {
+    padding: 0rem;
+  }
+  h2 {
+    font-size: 20px;
+    letter-spacing: -0.31px;
+  }
+  h5 {
+    font-size: 14px;
+  }
+  .small {
+    font-size: 11px;
+  }
 }/*# sourceMappingURL=index.css.map */

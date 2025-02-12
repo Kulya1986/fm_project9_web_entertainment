@@ -10,4 +10,14 @@
   width: 2510px;
   display: flex;
   gap: 40px;
+}
+
+@media only screen and (max-width: 480px) {
+  .trending-list {
+    margin-left: 16px;
+  }
+  .trending-list #trending-list-holder {
+    width: 1264px;
+    gap: 16px;
+  }
 }/*# sourceMappingURL=Trending.css.map */

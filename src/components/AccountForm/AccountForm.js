@@ -128,7 +128,7 @@ export default function AccountForm({ loggedIn }) {
         <img src={AccountLogo} alt="logo" />
       </div>
       <div id="account-form-container">
-        <h2>{newUser ? "Sign Up" : "Login"}</h2>
+        <h2 className="account-form-header">{newUser ? "Sign Up" : "Login"}</h2>
 
         <form id="account-form" onSubmit={handleFormSubmit}>
           <div>
