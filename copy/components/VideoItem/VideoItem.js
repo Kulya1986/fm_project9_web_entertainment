@@ -2,7 +2,7 @@ import React from "react";
 import CategoryMovie from "./../../assets/icon-category-movie.svg";
 import CategoryTV from "./../../assets/icon-category-tv.svg";
 import Play from "./../../assets/icon-play.svg";
-import useImage from "./../../useImage";
+import useImage from "../../useImage";
 import "./VideoItem.css";
 
 export default function VideoItem({

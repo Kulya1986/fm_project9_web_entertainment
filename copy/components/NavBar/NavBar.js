@@ -1,6 +1,6 @@
 import React from "react";
 import "./NavBar.css";
-import useImage from "./../../useImage";
+import useImage from "../../useImage";
 
 export default function NavBar({ menuPage, onMenuItemClick }) {
   const { loading, image } = useImage("image-avatar.png");
