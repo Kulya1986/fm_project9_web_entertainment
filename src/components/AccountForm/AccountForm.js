@@ -1,13 +1,21 @@
 import React, { useReducer } from "react";
 import AccountLogo from "./../../assets/logo.svg";
 import "./AccountForm.css";
+import { useUser } from "../../contexts/UserContext";
+import { Link } from "react-router";
+import { loginUser, registerUser } from "../../apiEntertainment";
 
 const initialState = {
   newUser: true,
   emailAddress: "",
   password: "",
   repeatPassword: "",
-  errMsg: { emailErrMsg: "", passwordErrMsg: "", repeatPassErrMsg: "" },
+  errMsg: {
+    emailErrMsg: "",
+    passwordErrMsg: "",
+    repeatPassErrMsg: "",
+    actionErrMsg: "",
+  },
 };
 
 function reducer(state, action) {
@@ -17,7 +25,7 @@ function reducer(state, action) {
         ...state,
         newUser: !state.newUser,
         repeatPassword: "",
-        errMsg: { ...state.errMsg, repeatPassErrMsg: "" },
+        errMsg: { ...state.errMsg, repeatPassErrMsg: "", actionErrMsg: "" },
       };
     case "emailAddressChange":
       return { ...state, emailAddress: action.payload };
@@ -45,69 +53,128 @@ function reducer(state, action) {
         ...state,
         errMsg: action.payload,
       };
+    case "formActionError":
+      return {
+        ...state,
+        errMsg: { ...state.errMsg, actionErrMsg: action.payload },
+      };
+    case "logoutClick":
+      return initialState;
     default:
       throw new Error("Unknown action type");
   }
 }
 
-export default function AccountForm({ loggedIn }) {
+export default function AccountForm() {
   const [formState, dispatch] = useReducer(reducer, initialState);
   const { newUser, emailAddress, password, repeatPassword, errMsg } = formState;
+  const { loggedIn, bookmarked, handleLogin, handleLogout } = useUser();
 
-  function handleFieldsValidation() {
+  function validateEmail(str) {
     const emailExp = /^[^@\s]+@[^@\s]+\.[^@\s]+$/;
-    const passwordExp = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?!.*\W).{6,}$/;
-    let emailError, passwordError, repeatPasswordError;
-
-    //validate email field
-    if (emailAddress.length === 0) {
+    if (str === 0) {
       //   console.log("Email empty");
-      emailError = "Can't be empty";
-    } else if (emailAddress.search(emailExp) !== 0) {
+      return "Can't be empty";
+    } else if (!emailExp.test(str)) {
       //   console.log("email wrong format");
-      emailError = "Use 'name@gmail.com'";
-    } else emailError = "";
-
-    //validate password field
-
-    if (password.length === 0) {
-      //   console.log("Password empty");
-      passwordError = "Can't be empty";
-    } else if (password.length < 6) {
-      //   console.log("Pass length");
-      passwordError = "6 symbols min";
-    } else if (password.search(passwordExp) !== 0) {
-      //   console.log("Pass format");
-      passwordError = "Use [0-9],[A-Za-z]";
-    } else passwordError = "";
-
-    //validate repeate password field
-
-    if (repeatPassword.length === 0) {
-      //   console.log("Repeat empty");
-      repeatPasswordError = "Can't be empty";
-    } else if (password !== repeatPassword) {
-      //   console.log("Don't match");
-      repeatPasswordError = "Passwords must match";
-    } else repeatPasswordError = "";
-
-    dispatch({
-      type: "setErrors",
-      payload: {
-        emailErrMsg: emailError,
-        passwordErrMsg: passwordError,
-        repeatPassErrMsg: repeatPasswordError,
-      },
-    });
+      return "Use 'name@gmail.com'";
+    } else return "";
   }
 
-  function handleFormSubmit(e) {
+  function validatePassword(str) {
+    const passwordExp = /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?!.*\W).{6,}$/;
+    if (str.length === 0) {
+      //   console.log("Password empty");
+      return "Can't be empty";
+    } else if (str.length < 6) {
+      //   console.log("Pass length");
+      return "6 symbols min";
+    } else if (!passwordExp.test(str)) {
+      //   console.log("Pass format");
+      return "Use [0-9],[A-Za-z]";
+    } else return "";
+  }
+
+  function validateRepeatPassword(str1, str2) {
+    if (str2.length === 0) {
+      //   console.log("Repeat empty");
+      return "Can't be empty";
+    } else if (str1 !== str2) {
+      //   console.log("Don't match");
+      return "Passwords must match";
+    } else return "";
+  }
+
+  async function submitForm(e) {
     e.preventDefault();
-    handleFieldsValidation();
-    console.log({
-      email: emailAddress,
-      password: password,
-    });
+
+    const formErrors = {
+      emailErrMsg: validateEmail(emailAddress),
+      passwordErrMsg: validatePassword(password),
+      repeatPassErrMsg: newUser
+        ? validateRepeatPassword(password, repeatPassword)
+        : "",
+      actionErrMsg: "",
+    };
+
+    if (
+      formErrors.emailErrMsg.length > 0 ||
+      formErrors.passwordErrMsg.length > 0 ||
+      formErrors.repeatPassErrMsg.length > 0
+    ) {
+      dispatch({
+        type: "setErrors",
+        payload: formErrors,
+      });
+      return false;
+    } else {
+      if (newUser) {
+        try {
+          const res = await registerUser(emailAddress, password, bookmarked);
+          if (res) {
+            const loggedUserData = await loginUser(emailAddress, password);
+            if (loggedUserData) handleLogin(loggedUserData);
+            else {
+              dispatch({
+                type: "formActionError",
+                payload: "Something went wrong while login. Try again!",
+              });
+              return false;
+            }
+          }
+        } catch (err) {
+          dispatch({
+            type: "formActionError",
+            payload: err.message,
+          });
+        }
+      }
+
+      if (!newUser) {
+        try {
+          const loggedUserData = await loginUser(emailAddress, password);
+
+          if (loggedUserData) handleLogin(loggedUserData);
+          else {
+            dispatch({
+              type: "formActionError",
+              payload: "Something went wrong while login. Try again!",
+            });
+            return false;
+          }
+        } catch (err) {
+          dispatch({
+            type: "formActionError",
+            payload: err.message,
+          });
+        }
+      }
+    }
+  }
+
+  function logoutClick() {
+    dispatch({ type: "logoutClick" });
+    handleLogout();
   }
 
   if (loggedIn)
@@ -117,7 +184,9 @@ export default function AccountForm({ loggedIn }) {
           <img src={AccountLogo} alt="logo" />
         </div>
         <div id="account-form-container">
-          <h2 id="logged-msg">You are already logged in</h2>
+          <h2 id="logged-msg">You're successfully logged in.</h2>
+          <Link to="/">Go to the Homepage &rArr;</Link>
+          <button onClick={logoutClick}>Logout</button>
         </div>
       </div>
     );
@@ -127,10 +196,16 @@ export default function AccountForm({ loggedIn }) {
       <div id="account-logo">
         <img src={AccountLogo} alt="logo" />
       </div>
+      <div id="account-back-link">
+        <Link to="/">&lArr; Back to Homepage</Link>
+      </div>
       <div id="account-form-container">
         <h2 className="account-form-header">{newUser ? "Sign Up" : "Login"}</h2>
+        {errMsg.actionErrMsg && (
+          <p className="account-form-error">{errMsg.actionErrMsg}</p>
+        )}
 
-        <form id="account-form" onSubmit={handleFormSubmit}>
+        <form id="account-form" onSubmit={(e) => submitForm(e)}>
           <div>
             <input
               aria-label="email-field"
@@ -201,6 +276,7 @@ export default function AccountForm({ loggedIn }) {
             {newUser ? "Create an account" : "Login to your account"}
           </button>
         </form>
+
         <p className="form-alternative">
           {newUser ? "Already have an account?" : "Don't have an account"}
           <button onClick={() => dispatch({ type: "newUserChange" })}>

@@ -8,6 +8,21 @@
   margin-top: 3rem;
   text-align: center;
 }
+
+#account-back-link {
+  margin: auto;
+  width: fit-content;
+  a {
+    color: $app-color-white;
+    font-size: $app-heading-h3;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
 #account-form-container {
   margin: 5rem auto 0rem;
   padding: 2rem;
@@ -17,6 +32,15 @@
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
+
+  #logged-msg {
+    text-align: center;
+  }
+
+  .account-form-error {
+    color: $app-color-red;
+    margin-top: 40px;
+  }
 
   input:hover,
   label:hover {
@@ -42,9 +66,18 @@
     }
   }
 
-  #logged-msg {
+  a {
+    margin: 1rem 0rem;
     text-align: center;
+    color: $app-color-white;
+    font-size: $app-heading-h3;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
+
   h2 {
     margin: 0;
   }
@@ -69,6 +102,8 @@
         text-decoration: underline;
       }
     }
+  }
+  a {
   }
 }
 

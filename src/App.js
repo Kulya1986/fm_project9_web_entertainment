@@ -1,7 +1,6 @@
 import React from "react";
 import "./App.css";
-// import { useLocalStorage } from "./useLocalStorage";
-import { useEntertainment } from "./contexts/EntertainmentContext";
+// import { useEntertainment } from "./contexts/EntertainmentContext";
 import { BrowserRouter, Route, Routes } from "react-router";
 import Movies from "./pages/Movies";
 import TVseries from "./pages/TVseries";
@@ -10,12 +9,7 @@ import Account from "./pages/Account";
 import Homepage from "./pages/Homepage";
 
 export default function App() {
-  const { entertainmentData } = useEntertainment();
-  // const [loggedIn, setLoggedIn] = useLocalStorage(false, "entertainmentLogged");
-
-  if (!entertainmentData) return <div>Loading application data</div>;
-
-  console.log(entertainmentData);
+  // const { entertainmentData } = useEntertainment();
 
   return (
     <div id="container">

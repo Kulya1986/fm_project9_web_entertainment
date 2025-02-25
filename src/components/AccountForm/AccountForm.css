@@ -8,6 +8,20 @@
   text-align: center;
 }
 
+#account-back-link {
+  margin: auto;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+#account-back-link a {
+  color: #ffffff;
+  font-size: 24px;
+  text-decoration: none;
+}
+#account-back-link a:hover {
+  text-decoration: underline;
+}
+
 #account-form-container {
   margin: 5rem auto 0rem;
   padding: 2rem;
@@ -17,6 +31,13 @@
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
+}
+#account-form-container #logged-msg {
+  text-align: center;
+}
+#account-form-container .account-form-error {
+  color: #fc4747;
+  margin-top: 40px;
 }
 #account-form-container input:hover,
 #account-form-container label:hover {
@@ -40,8 +61,15 @@
   background-color: #ffffff;
   color: #161d2f;
 }
-#account-form-container #logged-msg {
+#account-form-container a {
+  margin: 1rem 0rem;
   text-align: center;
+  color: #ffffff;
+  font-size: 24px;
+  text-decoration: none;
+}
+#account-form-container a:hover {
+  text-decoration: underline;
 }
 #account-form-container h2 {
   margin: 0;
@@ -68,7 +96,6 @@
   color: #fc4747;
   text-decoration: underline;
 }
-
 #account-form {
   display: flex;
   flex-direction: column;

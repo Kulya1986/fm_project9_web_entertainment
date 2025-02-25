@@ -35,12 +35,12 @@ export default function Trending() {
         >
           {videosData.map((item, index) => (
             <VideoItem
-              key={index}
+              key={item.videoID}
+              videoID={item.videoID}
               title={item.title}
               category={item.category}
               year={item.year}
               rating={item.rating}
-              isBookmarked={item.isBookmarked}
               thumbnails={item.thumbnail.trending}
               trending={true}
             />

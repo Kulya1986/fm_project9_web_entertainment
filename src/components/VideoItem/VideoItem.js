@@ -4,32 +4,38 @@ import CategoryTV from "./../../assets/icon-category-tv.svg";
 import Play from "./../../assets/icon-play.svg";
 import useImage from "./../../useImage";
 import "./VideoItem.css";
-import { useEntertainment } from "../../contexts/EntertainmentContext";
+import { useUser } from "../../contexts/UserContext";
 
 export default function VideoItem({
+  videoID,
   title,
   category,
   year,
   rating,
-  isBookmarked,
   thumbnails,
   trending = false,
 }) {
   const imgPath = thumbnails.large.slice(9);
   const { image } = useImage(imgPath);
-  const { handleBookmarkClick } = useEntertainment();
+  const { handleBookmarkClick, bookmarked } = useUser();
 
   return (
     <div className={`video-item ${trending ? "trend-item" : ""}`}>
       <div className="video-item-thumb">
         <img src={image} alt={title} />
-        <div className="bookmark-bg" onClick={() => handleBookmarkClick(title)}>
+
+        <div
+          className="bookmark-bg"
+          onClick={() => handleBookmarkClick(videoID)}
+        >
           <svg width="12" height="14" xmlns="http://www.w3.org/2000/svg">
             <path
               d="m10.518.75.399 12.214-5.084-4.24-4.535 4.426L.75 1.036l9.768-.285Z"
               stroke="#FFF"
               strokeWidth="1.5"
-              fill={isBookmarked ? "#FFF" : "none"}
+              fill={
+                bookmarked.find((video) => video === videoID) ? "#FFF" : "none"
+              }
             />
           </svg>
         </div>

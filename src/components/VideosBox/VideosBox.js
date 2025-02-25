@@ -2,10 +2,12 @@ import React from "react";
 import VideoItem from "../VideoItem/VideoItem";
 import "./VideosBox.css";
 import { useEntertainment } from "../../contexts/EntertainmentContext";
+import { useUser } from "../../contexts/UserContext";
 
 export default function VideosBox({ page, section }) {
-  const { entertainmentData, searchQuery, searchResultData } =
+  const { entertainmentData, searchQuery, searchResultData, error } =
     useEntertainment();
+  const { bookmarked } = useUser();
 
   const pageData = searchQuery.length ? searchResultData : entertainmentData;
   const videosData =
@@ -13,18 +15,20 @@ export default function VideosBox({ page, section }) {
       ? pageData
       : page === "Bookmarked" && section === "Movies"
       ? pageData.filter(
-          (item) => item.isBookmarked && item.category === "Movies"
+          (item) =>
+            bookmarked.includes(item.videoID) && item.category === "Movies"
         )
       : page === "Bookmarked" && section === "TV Series"
       ? pageData.filter(
-          (item) => item.isBookmarked && item.category === "TV Series"
+          (item) =>
+            bookmarked.includes(item.videoID) && item.category === "TV Series"
         )
       : page === "Movies" || page === "TV Series"
       ? pageData.filter(
           (item) => item.category.toLowerCase() === page.toLowerCase()
         )
       : page === "Bookmarked"
-      ? pageData.filter((item) => item.isBookmarked)
+      ? pageData.filter((item) => bookmarked.includes(item.videoID))
       : pageData;
 
   const sectionTitle = searchQuery.length
@@ -41,17 +45,17 @@ export default function VideosBox({ page, section }) {
         {videosData.length > 0
           ? videosData.map((item, index) => (
               <VideoItem
-                key={index}
+                key={item.videoID}
+                videoID={item.videoID}
                 title={item.title}
                 category={item.category}
                 year={item.year}
                 rating={item.rating}
-                isBookmarked={item.isBookmarked}
                 thumbnails={item.thumbnail.regular}
               />
             ))
           : !searchQuery.length
-          ? "No videos to display"
+          ? error
           : ""}
       </div>
     </section>

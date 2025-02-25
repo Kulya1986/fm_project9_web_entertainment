@@ -27,8 +27,7 @@ Users should be able to:
 - Navigate between Home, Movies, TV Series, and Bookmarked Shows pages
 - Add/Remove bookmarks from all movies and TV series
 - Search for relevant shows on all pages
-- **StillWorking**: Build this project as a full-stack application
-- **StillWorking**: If you're building a full-stack app, we provide authentication screen (sign-up/login) designs if you'd like to create an auth flow
+- Project was build as a full-stack application with option to Login/Register and save your bookmarked videos.
 
 ### Screenshot
 
@@ -49,6 +48,7 @@ Users should be able to:
 - Sass
 - [React](https://reactjs.org/) - JS library
 - [React Router](https://reactrouter.com/) - React routing library
+- [Express](https://expressjs.com/) - Node.js web application framework
 
 ### What I learned
 
@@ -81,7 +81,7 @@ A new experience was to use variables for setting up animation props in CSS:
 
 ### Continued development
 
-Further working on this project to set it up as a Full-Stack App with server-side. And shortly will add functionality for creating account and saving user's preferences.
+I've managed to set this project up as s Full-Stack App with Node.js server. However due to limitations of free hosting used simple JSON files to store information about users, instead of Database. Also used not the best appoach for managing Global states which have to be synchronized with server, so still have to learn about this for future projects.
 
 ## Author
 

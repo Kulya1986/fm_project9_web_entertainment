@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useReducer } from "react";
+import { fetchEntertaimentData } from "../apiEntertainment";
 
 const EntertainmentContext = createContext();
 
@@ -7,6 +8,7 @@ const initialState = {
   searchResultData: [],
   searchQuery: "",
   error: "",
+  isLoading: true,
 };
 
 function reducer(state, action) {
@@ -19,19 +21,17 @@ function reducer(state, action) {
         searchResultData: [],
       };
     case "entertaiment_data_load":
-      return { ...state, error: "", entertainmentData: action.payload };
-    case "rejected_data_load":
-      return { ...state, error: action.payload };
-    case "bookmark_click":
       return {
         ...state,
+        error: "",
         entertainmentData: action.payload,
-        searchResultData: state.searchResultData.length
-          ? action.payload.filter((item) =>
-              item.title.toLowerCase().includes(state.searchQuery.toLowerCase())
-            )
-          : state.searchResultData,
+        isLoading: false,
       };
+    case "rejected_data_load":
+      return { ...state, error: action.payload, isLoading: false };
+
+    case "loading_data":
+      return { ...state, isLoading: true };
     case "search":
       return {
         ...state,
@@ -45,13 +45,7 @@ function reducer(state, action) {
 
 function EntertainmentProvider({ children }) {
   const [
-    {
-      entertainmentData,
-      searchResultData,
-
-      searchQuery,
-      error,
-    },
+    { entertainmentData, searchResultData, searchQuery, error, isLoading },
     dispatch,
   ] = useReducer(reducer, initialState);
 
@@ -68,31 +62,26 @@ function EntertainmentProvider({ children }) {
     dispatch({ type: "page_change" });
   }
 
-  function handleBookmarkClick(name) {
-    const tempArr = entertainmentData.reduce((acc, curr) => {
-      if (curr.title.toLowerCase() === name.toLowerCase()) {
-        let bookmark = curr.isBookmarked;
-        return [...acc, { ...curr, isBookmarked: !bookmark }];
-      } else return [...acc, curr];
-    }, []);
-
-    dispatch({ type: "bookmark_click", payload: tempArr });
-  }
-
   useEffect(function () {
-    async function fetchEntertaimentData() {
+    dispatch({ type: "loading_data" });
+    async function fetchData() {
       try {
-        const res = await fetch("/videos.json");
-        const data = await res.json();
-        dispatch({ type: "entertaiment_data_load", payload: data });
-      } catch {
+        const videosData = await fetchEntertaimentData();
+        if (videosData)
+          dispatch({ type: "entertaiment_data_load", payload: videosData });
+        else
+          dispatch({
+            type: "rejected_data_load",
+            payload: videosData,
+          });
+      } catch (err) {
         dispatch({
           type: "rejected_data_load",
-          payload: "There was an error while loading data",
+          payload: err.message,
         });
       }
     }
-    fetchEntertaimentData();
+    fetchData();
   }, []);
 
   return (
@@ -101,10 +90,9 @@ function EntertainmentProvider({ children }) {
         entertainmentData,
         searchQuery,
         searchResultData,
-
+        isLoading,
         error,
         handleSearchQueryChange,
-        handleBookmarkClick,
         handlePageChange,
       }}
     >

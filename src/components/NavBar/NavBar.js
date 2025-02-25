@@ -3,13 +3,14 @@ import "./NavBar.css";
 import useImage from "./../../useImage";
 import { useEntertainment } from "../../contexts/EntertainmentContext";
 import { NavLink } from "react-router";
+import { useUser } from "../../contexts/UserContext";
 
 export default function NavBar() {
   const { loading, image } = useImage("image-avatar.png");
   const { handlePageChange } = useEntertainment();
+  const { loggedIn } = useUser();
   return (
     <nav>
-      {/* <div id="menu"> */}
       <div id="menu-account-logo" onClick={handlePageChange}>
         <NavLink to="/account">
           <svg width="33" height="27" xmlns="http://www.w3.org/2000/svg">
@@ -64,8 +65,14 @@ export default function NavBar() {
           </NavLink>
         </li>
       </ul>
-      {/* </div> */}
-      <div id="account-img">{!loading && <img src={image} alt="Avatar" />}</div>
+
+      {loggedIn ? (
+        <div id="account-img">
+          {!loading && <img src={image} alt="Avatar" />}
+        </div>
+      ) : (
+        <div></div>
+      )}
     </nav>
   );
 }
