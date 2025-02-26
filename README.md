@@ -36,7 +36,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [https://github.com/Kulya1986/fm_project9_web_entertainment](https://github.com/Kulya1986/fm_project9_web_entertainment)
-- Live Site URL: [https://adorable-pegasus-f804e3.netlify.app/](https://adorable-pegasus-f804e3.netlify.app/)
+- Live Site URL: [https://entertainmentpagekulya1986.netlify.app/](https://entertainmentpagekulya1986.netlify.app/)
 
 ## My process
 
