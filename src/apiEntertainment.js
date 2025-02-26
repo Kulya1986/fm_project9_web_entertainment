@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3001";
+const API_URL = "https://fm-project9-web-entertainment-server.onrender.com";
 
 export async function registerUser(emailAddress, password, bookmarked) {
   try {
